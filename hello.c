@@ -1,30 +1,5 @@
 #include <stdio.h>
 
-int get_integer(void);
-int combination(int n, int r);
-int factorial(int n);
-
-int main(void)
-{
-    int n, r;
-
-    n = get_integer();
-    r = get_integer();
-
-    if (n < 0 || r < 0 || r > n) {
-        printf("Invalid input: need 0 <= r <= n\n");
-        return 1;
-    }
-
-    printf("C(%d, %d) = %d\n", n, r, combination(n, r));
-    return 0;
-}
-
-int combination(int n, int r)
-{
-    return factorial(n) / (factorial(n - r) * factorial(r));
-}
-
 int factorial(int n)
 {
     int i;
@@ -34,10 +9,38 @@ int factorial(int n)
     return res;
 }
 
-int get_integer(void)
+int combination(int n, int r)
 {
-    int value;
-    printf("Enter an integer: ");
-    scanf("%d", &value);
-    return value;
+    int up, down;
+
+    up = factorial(n);
+    down = factorial(n - r) * factorial(r);
+
+    return up / down;
+}
+
+int main(void)
+{
+    //변수 선언 ---
+    int result;
+    int n, r;
+
+    //입력 받기 ----
+    //n 입력 문구 찍기
+    printf("input n :");
+    //scanf n
+    scanf("%i", &n);
+
+    //r 입력문구 찍기
+    printf("input r :");
+    //scanf r
+    scanf("%i", &r);
+
+    //계산
+    result = combination(n, r);
+
+    //결과 출력
+    printf("C(%i, %i) = %i\n", n, r, result);
+
+    return 0;
 }
